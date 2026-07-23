@@ -11,7 +11,7 @@ CREATE TABLE Department
     Dname VARCHAR(50) NOT NULL UNIQUE,
     Mgr_ssn CHAR(9),
     Mgr_start_date DATE
-); */
+); 
 CREATE TABLE Employee
 (
     Ssn CHAR(9) PRIMARY KEY,
@@ -24,4 +24,12 @@ CREATE TABLE Employee
     Salary DECIMAL(10,2) CHECK (Salary > 0),
     Super_ssn CHAR(9),
     Dno INT NOT NULL
+); */
+
+CREATE TABLE Dept_Locations
+(
+    Dnumber INT,
+    Dlocation VARCHAR(50),
+
+    PRIMARY KEY (Dnumber, Dlocation)
 );
