@@ -24,7 +24,7 @@ CREATE TABLE Employee
     Salary DECIMAL(10,2) CHECK (Salary > 0),
     Super_ssn CHAR(9),
     Dno INT NOT NULL
-); */
+); 
 
 CREATE TABLE Dept_Locations
 (
@@ -32,4 +32,11 @@ CREATE TABLE Dept_Locations
     Dlocation VARCHAR(50),
 
     PRIMARY KEY (Dnumber, Dlocation)
+); */ 
+CREATE TABLE Project
+(
+    Pnumber INT PRIMARY KEY,
+    Pname VARCHAR(50) NOT NULL UNIQUE,
+    Plocation VARCHAR(50),
+    Dnum INT NOT NULL
 );
