@@ -39,7 +39,7 @@ CREATE TABLE Project
     Pname VARCHAR(50) NOT NULL UNIQUE,
     Plocation VARCHAR(50),
     Dnum INT NOT NULL
-); */
+); 
 CREATE TABLE Works_On
 (
     Essn CHAR(9),
@@ -47,4 +47,14 @@ CREATE TABLE Works_On
     Hours DECIMAL(4,1),
 
     PRIMARY KEY (Essn, Pno)
+); */
+CREATE TABLE Dependent
+(
+    Essn CHAR(9),
+    Dependent_name VARCHAR(30),
+    Sex CHAR(1),
+    Bdate DATE,
+    Relationship VARCHAR(20),
+
+    PRIMARY KEY (Essn, Dependent_name)
 );
