@@ -4,7 +4,7 @@ GO
 
 USE CompanyDB;
 GO
-
+*/
 CREATE TABLE Department
 (
     Dnumber INT PRIMARY KEY,
@@ -57,7 +57,8 @@ CREATE TABLE Dependent
     Relationship VARCHAR(20),
 
     PRIMARY KEY (Essn, Dependent_name)
-); */
+); 
+
 
 ALTER TABLE Employee
 ADD CONSTRAINT FK_Employee_Department
@@ -97,4 +98,18 @@ REFERENCES Project(Pnumber);
 ALTER TABLE Dependent
 ADD CONSTRAINT FK_Dependent_Employee
 FOREIGN KEY (Essn)
-REFERENCES Employee(Ssn); 
+REFERENCES Employee(Ssn);  
+
+INSERT INTO Department (Dnumber, Dname, Mgr_ssn, Mgr_start_date) VALUES
+(1, 'Research', NULL, NULL),
+(2, 'Administration', NULL, NULL),
+(3, 'IT', NULL, NULL); 
+
+INSERT INTO Employee
+(Ssn, Fname, Minit, Lname, Bdate, Address, Sex, Salary, Super_ssn, Dno)VALUES
+('111111111','John','A','Smith','1980-03-15','Muscat','M',8000,NULL,1),
+('222222222','Sara','B','Ali','1990-08-10','Muscat','F',4500,'111111111',1),
+('333333333','Ahmed','C','Khan','1988-11-20','Sohar','M',5000,'111111111',2),
+('444444444','Lina','D','Salim','1995-02-05','Nizwa','F',4200,'333333333',3),
+('555555555','Omar','E','Hassan','1992-06-30','Salalah','M',4800,'333333333',3);
+
