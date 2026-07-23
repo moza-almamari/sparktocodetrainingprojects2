@@ -47,7 +47,7 @@ CREATE TABLE Works_On
     Hours DECIMAL(4,1),
 
     PRIMARY KEY (Essn, Pno)
-); */
+); 
 CREATE TABLE Dependent
 (
     Essn CHAR(9),
@@ -57,4 +57,44 @@ CREATE TABLE Dependent
     Relationship VARCHAR(20),
 
     PRIMARY KEY (Essn, Dependent_name)
-);
+); */
+
+ALTER TABLE Employee
+ADD CONSTRAINT FK_Employee_Department
+FOREIGN KEY (Dno)
+REFERENCES Department(Dnumber); 
+
+ALTER TABLE Employee
+ADD CONSTRAINT FK_Employee_Supervisor
+FOREIGN KEY (Super_ssn)
+REFERENCES Employee(Ssn); 
+
+ALTER TABLE Department
+ADD CONSTRAINT FK_Department_Manager
+FOREIGN KEY (Mgr_ssn)
+REFERENCES Employee(Ssn);
+
+ALTER TABLE Dept_Locations
+ADD CONSTRAINT FK_Location_Department
+FOREIGN KEY (Dnumber)
+REFERENCES Department(Dnumber); 
+
+ALTER TABLE Project
+ADD CONSTRAINT FK_Project_Department
+FOREIGN KEY (Dnum)
+REFERENCES Department(Dnumber); 
+
+ALTER TABLE Works_On
+ADD CONSTRAINT FK_WorksOn_Employee
+FOREIGN KEY (Essn)
+REFERENCES Employee(Ssn); 
+
+ALTER TABLE Works_On
+ADD CONSTRAINT FK_WorksOn_Project
+FOREIGN KEY (Pno)
+REFERENCES Project(Pnumber); 
+
+ALTER TABLE Dependent
+ADD CONSTRAINT FK_Dependent_Employee
+FOREIGN KEY (Essn)
+REFERENCES Employee(Ssn); 
