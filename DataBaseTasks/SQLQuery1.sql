@@ -32,11 +32,19 @@ CREATE TABLE Dept_Locations
     Dlocation VARCHAR(50),
 
     PRIMARY KEY (Dnumber, Dlocation)
-); */ 
+); 
 CREATE TABLE Project
 (
     Pnumber INT PRIMARY KEY,
     Pname VARCHAR(50) NOT NULL UNIQUE,
     Plocation VARCHAR(50),
     Dnum INT NOT NULL
+); */
+CREATE TABLE Works_On
+(
+    Essn CHAR(9),
+    Pno INT,
+    Hours DECIMAL(4,1),
+
+    PRIMARY KEY (Essn, Pno)
 );
