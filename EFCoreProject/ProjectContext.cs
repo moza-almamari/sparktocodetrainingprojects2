@@ -19,5 +19,5 @@ namespace EFCoreProject
                 "Server=MOZA-PC\\SQLEXPRESS;Database=EFCoreProject;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
         }
 
-    }
+    } 
 }
