@@ -12,6 +12,6 @@ namespace E_Commerce_Database.Models
         public string PasswordHash { get; set; }
         public DateTime CreatedAt { get; set; } = DateTime.Now;
 
-        
+        public ICollection<Order> Orders { get; set; } = new List<Order>();
     }
 }
