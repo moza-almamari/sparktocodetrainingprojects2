@@ -175,6 +175,8 @@ namespace E_Commerce_Database
         static void Logout()
         {
             // TODO: implement - reset loggedInUserId back to 0
+            loggedInUserId = 0;
+            Console.WriteLine("Logged out.");
         }
     }
 }
