@@ -116,6 +116,37 @@ namespace E_Commerce_Database
         static void AddProduct()
         {
             // TODO: implement
+            var categories = context.Categories.ToList();
+            if (!categories.Any())
+            {
+                Console.WriteLine("No categories exist yet add one first.");
+                return;
+            }
+
+            Console.WriteLine("Categories:");
+            foreach (var c in categories)
+                Console.WriteLine(c.CategoryId + ") " + c.Name);
+
+            Console.Write("Product name: "); string name = Console.ReadLine();
+            Console.Write("Price: "); decimal price = decimal.Parse(Console.ReadLine());
+            Console.Write("Stock: "); int stock = int.Parse(Console.ReadLine());
+            Console.Write("Category Id: "); int catId = int.Parse(Console.ReadLine());
+
+            if (!categories.Any(c => c.CategoryId == catId))
+            {
+                Console.WriteLine("Invalid category Id");
+                return;
+            }
+
+            context.Products.Add(new Product
+            {
+                Name = name,
+                Price = price,
+                Stock = stock,
+                CategoryId = catId
+            });
+            context.SaveChanges();
+            Console.WriteLine("Product added");
         }
         static void ViewAllProducts()
         {
