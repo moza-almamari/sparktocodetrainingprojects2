@@ -4,6 +4,7 @@ using System.Text;
 using EFCoreProject.Models;
 using Microsoft.EntityFrameworkCore;
 
+
 namespace EFCoreProject
 {
     public class ProjectContext : DbContext //oop inhertance 
