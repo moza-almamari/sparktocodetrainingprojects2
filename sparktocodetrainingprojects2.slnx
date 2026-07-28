@@ -7,5 +7,6 @@
     <File Path="E-Commerce Database/ERD.drawio.jpg" />
     <File Path="E-Commerce Database/Mapping.jpg" />
   </Folder>
+  <Project Path="E-Commerce_Database/E-Commerce_Database.csproj" Id="2c79cf45-f447-4eaf-9ba8-f74ff1714821" />
   <Project Path="EFCoreProject/EFCoreProject.csproj" Id="a0480db1-4da3-4abc-ad7c-7c0279976b98" />
 </Solution>
