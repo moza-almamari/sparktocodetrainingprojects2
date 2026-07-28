@@ -1,6 +1,7 @@
 ﻿
 using System;
 using System.Linq;
+using E_Commerce_Database.Models;
 namespace E_Commerce_Database
 {
     internal class Program
@@ -71,6 +72,20 @@ namespace E_Commerce_Database
         static void RegisterUser()
         {
             // TODO: implement (see Part 3 requirements)
+            Console.Write("Name: "); string name = Console.ReadLine();
+            Console.Write("Email: "); string email = Console.ReadLine();
+            Console.Write("Password: "); string password = Console.ReadLine();
+
+            if (context.Users.Any(u => u.Email == email))
+            {
+                Console.WriteLine("A user with that email already exists");
+                return;
+            }
+
+            var user = new User { Name = name, Email = email, PasswordHash = password };
+            context.Users.Add(user);
+            context.SaveChanges();
+            Console.WriteLine("User registered with Id " + user.UserId);
         }
         static void Login()
         {
