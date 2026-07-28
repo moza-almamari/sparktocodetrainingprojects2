@@ -19,6 +19,6 @@ namespace EFCoreProject
             optionsBuilder.UseSqlServer(
                 "Server=MOZA-PC\\SQLEXPRESS;Database=EFCoreProject;Trusted_Connection=True;TrustServerCertificate=True;Encrypt=False;");
         }
-
+        
     } 
 }
