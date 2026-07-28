@@ -106,6 +106,12 @@ namespace E_Commerce_Database
         static void AddCategory()
         {
             // TODO: implement
+            Console.Write("Category name: "); string name = Console.ReadLine();
+            Console.Write("Description: "); string desc = Console.ReadLine();
+
+            context.Categories.Add(new Category { Name = name, Description = desc });
+            context.SaveChanges();
+            Console.WriteLine("Category added");
         }
         static void AddProduct()
         {
