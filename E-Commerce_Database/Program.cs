@@ -90,6 +90,18 @@ namespace E_Commerce_Database
         static void Login()
         {
             // TODO: implement - on success, set loggedInUserId = <found user's Id>
+            Console.Write("Email: "); string email = Console.ReadLine();
+            Console.Write("Password: "); string password = Console.ReadLine();
+
+            var user = context.Users.FirstOrDefault(u => u.Email == email && u.PasswordHash == password);
+            if (user == null)
+            {
+                Console.WriteLine("Invalid email or password");
+                return;
+            }
+
+            loggedInUserId = user.UserId;
+            Console.WriteLine("Welcome back "+ user.Name);
         }
         static void AddCategory()
         {
