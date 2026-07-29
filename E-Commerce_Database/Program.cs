@@ -286,8 +286,24 @@ namespace E_Commerce_Database
         }
         static void ViewReviewsForProduct()
         {
+            // TODO: implement
+            Console.Write("Product Id: "); int productId = int.Parse(Console.ReadLine());
+
+            var reviews = context.OrderProducts
+                .Where(op => op.ProductId == productId)
+                .Select(op => op.Order.Review)
+                .Where(r => r != null)
+                .ToList();
+
+            if (!reviews.Any())
+            {
+                Console.WriteLine("No reviews yet for this product");
+                return;
+            }
+            foreach (var r in reviews)
+                Console.WriteLine($"  {r.Rating}/5 - {r.Comment} (Order {r.OrderId})");
         }
-        // TODO: implement
+
         static void Logout()
         {
             // TODO: implement - reset loggedInUserId back to 0
