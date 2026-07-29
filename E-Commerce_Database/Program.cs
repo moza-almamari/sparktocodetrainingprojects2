@@ -225,6 +225,32 @@ namespace E_Commerce_Database
         static void ViewOrderDetails()
         {
             // TODO: implement
+            Console.Write("Order Id: "); int orderId = int.Parse(Console.ReadLine());
+
+            var order = context.Orders
+                .Include(o => o.OrderProducts).ThenInclude(op => op.Product)
+                .Include(o => o.Review)
+                .FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order == null)
+            {
+                Console.WriteLine("Order not found");
+                return;
+            }
+
+            decimal total = 0;
+            Console.WriteLine($"Order {order.OrderId} - {order.OrderDate:d}");
+            foreach (var line in order.OrderProducts)
+            {
+                var lineTotal = line.Product.Price * line.Quantity;
+                total += lineTotal;
+                Console.WriteLine($"  {line.Product.Name} x{line.Quantity} = {lineTotal:C}");
+            }
+            Console.WriteLine($"Total: {total:C}");
+
+            Console.WriteLine(order.Review == null
+                ? "No review yet"
+                : $"Review: {order.Review.Rating}/5 - {order.Review.Comment}");
         }
         static void AddReview()
         {
