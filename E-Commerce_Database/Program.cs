@@ -2,6 +2,7 @@
 using System;
 using System.Linq;
 using E_Commerce_Database.Models;
+using Microsoft.EntityFrameworkCore;
 namespace E_Commerce_Database
 {
     internal class Program
@@ -48,7 +49,7 @@ namespace E_Commerce_Database
                     case 2: Login(); break;
                     case 3: AddCategory(); break;
                     case 4: AddProduct(); break;
-                    case 5: ViewAllProducts(); break;
+                    //case 5: ViewAllProducts(); break;
                     case 6: PlaceOrder(); break;
                     case 7: ViewMyOrders(); break;
                     case 8: ViewOrderDetails(); break;
@@ -148,13 +149,62 @@ namespace E_Commerce_Database
             context.SaveChanges();
             Console.WriteLine("Product added");
         }
-        static void ViewAllProducts()
+       /* static void ViewAllProducts()
         {
-            // TODO: implement
-        }
+            // TODO: implementConsole.Write("Filter by Category Id (blank for all): ");
+            string input = Console.ReadLine();
+
+            var query = context.Products.Include(p => p.Category).AsQueryable();
+            if (int.TryParse(input, out int catId))
+                query = query.Where(p => p.CategoryId == catId);
+
+            foreach (var p in query.ToList())
+                Console.WriteLine($"[{p.ProductId}] {p.Name} - {p.Price:C} ({p.Category.Name})");
+        } */
         static void PlaceOrder()
         {
             // TODO: implement - check loggedInUserId != 0 first
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("You must be logged in to place an order.");
+                return;
+            }
+
+            var order = new Order { UserId = loggedInUserId, OrderDate = DateTime.Now };
+            context.Orders.Add(order);
+
+            bool addingMore = true;
+            while (addingMore)
+            {
+                Console.Write("Product Id to add (0 to finish): ");
+                int productId = int.Parse(Console.ReadLine());
+                if (productId == 0) { addingMore = false; continue; }
+
+                var product = context.Products.Find(productId);
+                if (product == null)
+                {
+                    Console.WriteLine("No such product");
+                    continue;
+                }
+
+                Console.Write("Quantity: ");
+                int qty = int.Parse(Console.ReadLine());
+
+                order.OrderProducts.Add(new OrderProduct { ProductId = productId, Quantity = qty });
+            }
+
+            if (!order.OrderProducts.Any())
+            {
+                Console.WriteLine("No products selected - order cancelled");
+                context.Orders.Remove(order);
+                return;
+            }
+
+            context.SaveChanges();
+            Console.WriteLine($"Order {order.OrderId} placed with {order.OrderProducts.Count} product line");   
+
+
+
         }
         static void ViewMyOrders()
         {
