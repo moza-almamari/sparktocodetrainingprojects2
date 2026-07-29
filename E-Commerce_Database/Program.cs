@@ -209,6 +209,18 @@ namespace E_Commerce_Database
         static void ViewMyOrders()
         {
             // TODO: implement - check loggedInUserId != 0 first
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("You must be logged in");
+                return;
+            }
+
+            var orders = context.Orders
+                .Where(o => o.UserId == loggedInUserId)
+                .ToList();
+
+            foreach (var o in orders)
+                Console.WriteLine($"Order {o.OrderId} - {o.OrderDate:d}");
         }
         static void ViewOrderDetails()
         {
