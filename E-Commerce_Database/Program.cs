@@ -255,6 +255,34 @@ namespace E_Commerce_Database
         static void AddReview()
         {
             // TODO: implement - check loggedInUserId != 0 first
+            if (loggedInUserId == 0)
+            {
+                Console.WriteLine("You must be logged in");
+                return;
+            }
+
+            Console.Write("Order Id: "); int orderId = int.Parse(Console.ReadLine());
+            var order = context.Orders.Include(o => o.Review)
+                .FirstOrDefault(o => o.OrderId == orderId);
+
+            if (order == null || order.UserId != loggedInUserId)
+            {
+                Console.WriteLine("Order not found or does not belong to you");
+                return;
+            }
+
+            if (order.Review != null)
+            {
+                Console.WriteLine("This order already has a review");
+                return;
+            }
+
+            Console.Write("Rating (1-5): "); int rating = int.Parse(Console.ReadLine());
+            Console.Write("Comment: "); string comment = Console.ReadLine();
+
+            context.Reviews.Add(new Review { OrderId = orderId, Rating = rating, Comment = comment });
+            context.SaveChanges();
+            Console.WriteLine("Review added");
         }
         static void ViewReviewsForProduct()
         {
